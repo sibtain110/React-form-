@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function From(props) {
@@ -10,7 +11,7 @@ export default function From(props) {
   const[name , setName] = useState("");
   const[email , setEmail] = useState("");
 
-   
+  const navigate = useNavigate('/')
 
   const handlesubmit=(e)=>{
     e.preventDefault();
@@ -18,7 +19,6 @@ export default function From(props) {
     console.log(newcontact);
     props.oncontactchange(newcontact);
     if(name === ''|| email=== ''){
-      alert('All fields are mandatory!')
     }
     else{
       alert('Contact Added')

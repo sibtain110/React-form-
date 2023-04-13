@@ -9,6 +9,8 @@ import Header from './component/Header';
 import Form from './component/Form'
 import List from './component/List';
 import Contacts from './component/Contacts'
+import Contactdetails from './component/Contactdetails';
+import Card from './component/Card';
 
 export default function App() {
 
@@ -43,9 +45,11 @@ export default function App() {
     <div>
       <Header/>
       <Routes>
-        <Route path='/' element={<Form contact={contacts} oncontactchange={oncontactchange}/>}></Route>
+        <Route path='form' element={<Form contact={contacts} oncontactchange={oncontactchange}/>}></Route>
         <Route path='Contactlist' element={<List/>}></Route>
-        <Route path='Contacts' element={<Contacts contact={contacts} handledelete={handledelete}/>}></Route>
+        <Route path='/' element={<Contacts contact={contacts} handledelete={handledelete}/>}></Route>
+        <Route path='Contactdetails' element={<Contactdetails/>}></Route>
+        <Route path='Card' element={<Card/>}></Route>
       </Routes>
       
       

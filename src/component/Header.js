@@ -166,7 +166,7 @@ export default function Header() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            onClick={()=> navigate('contacts')}
+            onClick={()=> navigate('/')}
           >
             <MenuIcon />
           </IconButton>
