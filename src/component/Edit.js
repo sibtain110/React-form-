@@ -1,43 +1,43 @@
-import React ,{useState } from 'react';
+import React , {useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { useNavigate } from 'react-router-dom';
+import { useLocation , useNavigate} from 'react-router-dom'
 
+export default function Edit(props) {
 
-export default function From(props) {
- 
+  console.log(props.handleupdate);
+
+  const navigate = useNavigate();
+
+    const location = useLocation();
+    const event= location.state;
+    // console.log(event);
+
+    const {contact} = location.state;
+    
   const[name , setName] = useState("");
   const[email , setEmail] = useState("");
 
-  const navigate = useNavigate('/')
+  useEffect(()=>{
+    if(contact)
+    setName(contact.name)
+    setEmail(contact.email)
+  },[contact])
 
+ 
   const handlesubmit=(e)=>{
     e.preventDefault();
-    const newcontact = {name,email};
-    console.log(newcontact);
-    props.oncontactchange(newcontact);
     if(name === ''|| email=== ''){
     }
-    else{
-      alert('Contact Added')
-    }
-
-    setName('');
-    setEmail('');
+    handleupdate()
+  };
+  const handleupdate = ()=>{
+    props.updateContact({name,email});
+    navigate('/')
   }
-
   return (
     <>
-
-<Navbar bg="primary" variant="dark" className='mt-4'>
-     <Container className='justify-content-center'>
-       <Navbar.Brand href="#home">Contact Form</Navbar.Brand>
-     </Container>
-   </Navbar>
-
-    <div className='container'>
+      <div className='container'>
       <div className='container'>
 <div className='row'>
 <div className='col-3'></div>
@@ -61,7 +61,7 @@ export default function From(props) {
       </Form.Group>
 
       <Button variant="primary" type="submit" >
-        Add
+        Update
       </Button>
     </Form>
     </div>
@@ -71,5 +71,5 @@ export default function From(props) {
 </div>
     </div>
     </>
-  );
+  )
 }

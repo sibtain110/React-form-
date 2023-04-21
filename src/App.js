@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Routes , Route} from 'react-router-dom'
+import {Routes , Route, json} from 'react-router-dom'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -11,6 +11,7 @@ import List from './component/List';
 import Contacts from './component/Contacts'
 import Contactdetails from './component/Contactdetails';
 import Card from './component/Card';
+import Edit from './component/Edit';
 
 export default function App() {
 
@@ -39,7 +40,19 @@ export default function App() {
     if(retrieve) setContacts(retrieve)
   },[])
 
-  
+  const updateContact = (handleupdate)=>{
+    const updatedContact = [...contacts];
+    console.log(updatedContact);
+    console.log(handleupdate);
+
+    const contactindex = updatedContact.findIndex((contacts)=>
+    contacts.email === handleupdate.email)
+    updatedContact[contactindex] = handleupdate;
+    setContacts(updatedContact);
+
+    localStorage.setItem( 'contacts' ,JSON.stringify (updatedContact))
+
+  }
   
   return (
     <div>
@@ -47,9 +60,10 @@ export default function App() {
       <Routes>
         <Route path='form' element={<Form contact={contacts} oncontactchange={oncontactchange}/>}></Route>
         <Route path='Contactlist' element={<List/>}></Route>
-        <Route path='/' element={<Contacts contact={contacts} handledelete={handledelete}/>}></Route>
+        <Route path='/' element={<Contacts contact={contacts} />}></Route>
         <Route path='Contactdetails' element={<Contactdetails/>}></Route>
-        <Route path='Card' element={<Card/>}></Route>
+        <Route path='Card' element={<Card handledelete={handledelete} />}></Route>
+        <Route path='edit' element={<Edit updateContact={updateContact}/>}></Route>
       </Routes>
       
       

@@ -1,15 +1,34 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import Button from 'react-bootstrap/Button'
+import { useNavigate , useLocation } from 'react-router-dom';
 import './Card.css'
 
 export default function Card(props) {
-  console.log(props);
+
+  // console.log(props.handledelete);
+
+  const navigate = useNavigate();
+  // const location= useLocation();
+  // console.log(location);
+
+  // const {name,email}=location.state.from;
+
+  const [items, setItems] = useState(['']);
+
+
+
+  const deleteevent = ()=>{
+    props.handledelete(props.index)
+  // const newItems = [...items.slice(0, index), ...items.slice(index+1)];
+  setItems(newItems);
+  };
+
   return (
     <>
       <div className='conformation'>
         <div className='cardcontainer'>
         <div className='closebtn'>
-        <Button className='xbtn' variant="text"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <Button onClick={() => navigate(-1)} className='xbtn' variant="text"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
   <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
 </svg></Button>
         </div>
@@ -20,8 +39,8 @@ export default function Card(props) {
             <p>The Contact Will Be Deleted Permenently</p>
           </div>
           <div className='footer'>
-          <Button variant="outline-secondary">Cancel</Button>{' '}
-          <Button variant="outline-danger">Delete</Button>{' '}
+          <Button  onClick={() => navigate(-1)}  variant="outline-secondary">Cancel</Button>{' '}
+          <Button onClick={deleteevent} variant="outline-danger">Delete</Button>{' '}
           </div>
         </div>
       </div>
