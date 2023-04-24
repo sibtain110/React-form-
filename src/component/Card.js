@@ -1,6 +1,6 @@
-import React , {useEffect} from 'react'
+import React from 'react'
 import Button from 'react-bootstrap/Button'
-import { useNavigate , useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Card.css'
 
 export default function Card(props) {
@@ -13,15 +13,19 @@ export default function Card(props) {
 
   // const {name,email}=location.state.from;
 
-  const [items, setItems] = useState(['']);
+  // const [items, setItems] = useState(['']); 
 
 
 
   const deleteevent = ()=>{
     props.handledelete(props.index)
-  // const newItems = [...items.slice(0, index), ...items.slice(index+1)];
-  setItems(newItems);
   };
+
+  const navigation = ()=>{
+    navigate('/')
+  }
+  
+
 
   return (
     <>
@@ -40,7 +44,7 @@ export default function Card(props) {
           </div>
           <div className='footer'>
           <Button  onClick={() => navigate(-1)}  variant="outline-secondary">Cancel</Button>{' '}
-          <Button onClick={deleteevent} variant="outline-danger">Delete</Button>{' '}
+          <Button onClick={() => { deleteevent(); navigation();}} variant="outline-danger">Delete</Button>{' '}
           </div>
         </div>
       </div>
